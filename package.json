@@ -5,8 +5,8 @@
   "scripts": {
     "android": "react-native run-android",
     "ios": "react-native run-ios",
-    "lint:eslint": "eslint . --ext .js,.jsx,.ts,.tsx",
-    "lint:prettier": "prettier --check '**/*.{js,jsx,ts,tsx,json,md}'",
+    "lint:eslint": "eslint . --ext 'src/**/*.{ts,tsx,js,jsx}'",
+    "lint:prettier": "prettier --check 'src/**/*.{js,jsx,ts,tsx,json,md}'",
     "prepare": "husky install .husky",
     "lint": "eslint --fix 'src/**/*.{ts,tsx,js,jsx}' && prettier --write 'src/**/*.{ts,tsx,js,jsx}'",
     "start": "react-native start --reset-cache",
@@ -24,6 +24,7 @@
     "@testing-library/jest-native": "^5.4.2",
     "@testing-library/react-hooks": "^8.0.1",
     "@testing-library/react-native": "^12.0.0-rc.0",
+    "@total-typescript/ts-reset": "^0.3.7",
     "@tsconfig/react-native": "^2.0.2",
     "@types/jest": "^29.4.0",
     "@types/react": "^18.0.24",
