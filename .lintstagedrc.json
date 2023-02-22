@@ -1,3 +1,5 @@
 {
-  "src/**/*.{js,jsx,ts,tsx,json,md}": ["yarn lint:eslint", "yarn lint:prettier", "yarn test"]
+  "src/**/*.{js,jsx,ts,tsx,json,md}": ["yarn lint:eslint", "yarn lint:prettier"],
+  "src/**/__tests__/**/*.ts?(x)": ["yarn test"],
+  "src/**/?(*.)+(spec|test).ts?(x)": ["yarn test"]
 }
