@@ -49,5 +49,11 @@
       "pre-commit": "lint-staged"
     }
   },
-  "lint-staged": "./.lintstagedrc.json"
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx,json,md}": [
+      "yarn lint:eslint",
+      "yarn lint:prettier",
+      "git add"
+    ]
+  }
 }

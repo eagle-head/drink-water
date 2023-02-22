@@ -1,3 +1,0 @@
-{
-  "*.{js,jsx,ts,tsx,json,md}": ["yarn lint:eslint", "yarn lint:prettier", "git add"]
-}
