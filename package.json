@@ -10,7 +10,7 @@
     "prepare": "husky install .husky",
     "lint": "eslint --fix 'src/**/*.{ts,tsx,js,jsx}' && prettier --write 'src/**/*.{ts,tsx,js,jsx}'",
     "start": "react-native start --reset-cache",
-    "test": "jest"
+    "test": "jest --maxWorkers=50%  --config=./jest.config.js"
   },
   "dependencies": {
     "react": "18.2.0",
