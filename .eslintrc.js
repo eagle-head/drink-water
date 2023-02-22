@@ -53,5 +53,11 @@ module.exports = {
         "import/no-unresolved": "off",
       },
     },
+    {
+      files: ["jest.setup.js"],
+      parserOptions: {
+        project: null,
+      },
+    },
   ],
 };
