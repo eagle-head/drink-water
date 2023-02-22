@@ -1,0 +1,23 @@
+{
+  "extends": "@tsconfig/react-native/tsconfig.json",
+  "compilerOptions": {
+    "skipLibCheck": false,
+    "experimentalDecorators": true,
+    "baseUrl": "./",
+    "paths": {
+      "@/enum": ["src/enum"],
+      "@/test": ["src/test"],
+      "@/hooks": ["src/hooks"],
+      "@/utils": ["src/utils"],
+      "@/stores": ["src/stores"],
+      "@/routes": ["src/routes"],
+      "@/assets": ["src/assets"],
+      "@/context": ["src/context"],
+      "@/storage": ["src/storage"],
+      "@/features": ["src/features"],
+      "@/providers": ["src/providers"],
+      "@/components": ["src/components"]
+    }
+  },
+  "include": ["src", ".eslintrc.js", "jest.setup.js"]
+}
