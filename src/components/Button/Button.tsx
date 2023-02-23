@@ -14,29 +14,6 @@ type ButtonProps = {
   isLoading?: boolean | undefined | null;
 };
 
-type ContainedDisabled = {
-  button: {
-    backgroundColor?: string | undefined;
-    borderColor?: string | undefined;
-  };
-  label?:
-    | {
-        color: string;
-      }
-    | undefined;
-};
-
-type OutilinedDisabled = {
-  button: {
-    borderColor?: string | undefined;
-  };
-  label?:
-    | {
-        color: string;
-      }
-    | undefined;
-};
-
 export const Button: RNElement<ButtonProps> = React.memo(
   ({ isDisabled, size, label, isPressed, isLoading, variant }) => {
     const disabledButtonStyles = isDisabled || isLoading ? disabled[variant].button : null;
@@ -143,13 +120,13 @@ const large = StyleSheet.create({
   },
 });
 
-const containedDisabled: ContainedDisabled = StyleSheet.create({
+const containedDisabled = StyleSheet.create({
   button: {
     backgroundColor: Colors.Disabled,
   },
 });
 
-const outlinedDisabled: OutilinedDisabled = StyleSheet.create({
+const outlinedDisabled = StyleSheet.create({
   button: {
     borderColor: Colors.Disabled,
   },
