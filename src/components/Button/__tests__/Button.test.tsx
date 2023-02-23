@@ -185,11 +185,11 @@ describe("Button", () => {
       },
       {
         backgroundColor: "transparent",
-        borderColor: "#44a9f0",
+        borderColor: Colors.Primary,
         borderWidth: 2.5,
       },
       {
-        borderColor: "#b8b8b8",
+        borderColor: Colors.Disabled,
       },
     ]);
 
