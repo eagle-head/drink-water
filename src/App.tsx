@@ -1,20 +1,19 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- */
-
 import React from "react";
 
-import { SafeAreaView, StyleSheet } from "react-native";
-import AntDesign from "react-native-vector-icons/AntDesign";
+import { SafeAreaView, StyleSheet, View } from "react-native";
+
+import { Button } from "./components";
+
+import { Colors } from "@/assets";
 
 const App: RNElement = () => {
   return (
     <SafeAreaView style={styles.container}>
-      <AntDesign name="customerservice" color="blue" size={50} />
-      <AntDesign name="windows" color="blue" size={50} />
+      <Button size="small" variant="contained" label="Press" />
+      <View style={{ height: 10, width: 2 }} />
+      <Button size="medium" variant="contained" label="Press" />
+      <View style={{ height: 10, width: 2 }} />
+      <Button size="large" variant="contained" label="Press" />
     </SafeAreaView>
   );
 };
@@ -24,6 +23,8 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
+    paddingHorizontal: 16,
+    backgroundColor: Colors.White,
   },
 });
 
