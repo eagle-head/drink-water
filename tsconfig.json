@@ -1,19 +1,21 @@
 {
   "extends": "@tsconfig/react-native/tsconfig.json",
   "compilerOptions": {
+    "types": ["jest", "styled-components-react-native"],
     "skipLibCheck": false,
     "experimentalDecorators": true,
     "baseUrl": "./",
     "paths": {
       "@/enum": ["src/enum"],
-      "@/test": ["src/test"],
+      "@/tests/*": ["src/tests/*"],
       "@/hooks": ["src/hooks"],
       "@/utils": ["src/utils"],
+      "@/themes": ["src/themes"],
       "@/stores": ["src/stores"],
       "@/routes": ["src/routes"],
       "@/assets": ["src/assets"],
-      "@/context": ["src/context"],
       "@/storage": ["src/storage"],
+      "@/contexts": ["src/contexts"],
       "@/features": ["src/features"],
       "@/providers": ["src/providers"],
       "@/components": ["src/components"]

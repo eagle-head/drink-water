@@ -1,31 +1,31 @@
 import React from "react";
 
-import { SafeAreaView, StyleSheet, View } from "react-native";
+import { View } from "react-native";
+import styled from "styled-components/native";
 
 import { Button } from "./components";
+import { AllProviders } from "./providers";
 
-import { Colors } from "@/assets";
+const StyledView = styled.View`
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+  padding-left: ${({ theme }) => theme.spacing[4]};
+  padding-right: ${({ theme }) => theme.spacing[4]};
+`;
 
 const App: RNElement = () => {
   return (
-    <SafeAreaView style={styles.container}>
-      <Button size="small" variant="contained" label="Press" />
-      <View style={{ height: 10, width: 2 }} />
-      <Button size="medium" variant="contained" label="Press" />
-      <View style={{ height: 10, width: 2 }} />
-      <Button size="large" variant="contained" label="Press" />
-    </SafeAreaView>
+    <AllProviders>
+      <StyledView>
+        <Button size="small" variant="contained" label="Press" />
+        <View style={{ height: 10, width: 2 }} />
+        <Button size="medium" variant="contained" label="Press" />
+        <View style={{ height: 10, width: 2 }} />
+        <Button size="large" variant="contained" label="Press" />
+      </StyledView>
+    </AllProviders>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
-    paddingHorizontal: 16,
-    backgroundColor: Colors.White,
-  },
-});
 
 export default App;
