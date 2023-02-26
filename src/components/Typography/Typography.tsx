@@ -1,13 +1,11 @@
 import React from "react";
 
-import styled from "styled-components/native";
+import { Text } from "./typography.styles";
 
-const Text = styled.Text`
-  font-size: 40px;
-  color: ${({ theme }) => theme.colors.error};
-  font-weight: bold;
-`;
-
-export const Typography = () => {
-  return <Text>Typography</Text>;
-};
+export const Typography: RNElement<TypographyProps> = React.memo(({ children, variant }) => {
+  return (
+    <Text variant={variant} accessibilityRole="text">
+      {children}
+    </Text>
+  );
+});
