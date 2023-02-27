@@ -12,6 +12,7 @@ const colors = {
     warning: "#ffb800",
     error: "#d0421b",
     disabled: "#b8b8b8",
+    divider: "#E0E0E0",
   },
   dark: {
     primary: "#44a9f0",
@@ -24,6 +25,7 @@ const colors = {
     warning: "#ffb800",
     error: "#f66454",
     disabled: "#b8b8b8",
+    divider: "#F5F5F5",
   },
 };
 

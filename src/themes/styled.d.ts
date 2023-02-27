@@ -15,6 +15,7 @@ declare module "styled-components/native" {
       warning: string;
       error: string;
       disabled: string;
+      divider: string;
     };
     spacing: {
       [key: number]: string;

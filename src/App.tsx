@@ -3,7 +3,7 @@ import React from "react";
 import { View } from "react-native";
 import styled from "styled-components/native";
 
-import { Typography } from "@/components";
+import { Divider, Typography } from "@/components";
 import { AllProviders } from "@/providers";
 
 const StyledView = styled.View`
@@ -19,8 +19,10 @@ const App: RNElement = () => {
     <AllProviders>
       <StyledView>
         <Typography variant="title">Example of title</Typography>
+        <Divider />
         <View style={{ height: 10, width: 2 }} />
         <Typography variant="subtitle">Example of subtitle</Typography>
+        <Divider />
         <View style={{ height: 10, width: 2 }} />
         <Typography variant="paragraph">
           Lorem ipsum dolor sit amet consectetur adipisicing elit. At id accusantium temporibus porro cupiditate error
