@@ -1,8 +1,9 @@
 import React from "react";
 
+import Icon from "react-native-vector-icons/FontAwesome5";
 import styled from "styled-components/native";
 
-import { CircularProgressBar } from "@/components";
+import { IconButton } from "@/components";
 import { AllProviders } from "@/providers";
 
 const View = styled.View`
@@ -17,7 +18,9 @@ const App: RNElement = () => {
   return (
     <AllProviders>
       <View>
-        <CircularProgressBar progress={0.25} size={250} strokeWidth={20} />
+        <IconButton>
+          <Icon name="glass-whiskey" size={60} color="#44a9f0" />
+        </IconButton>
       </View>
     </AllProviders>
   );
