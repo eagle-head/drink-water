@@ -1,12 +1,11 @@
 import React from "react";
 
-import { View } from "react-native";
 import styled from "styled-components/native";
 
-import { Divider, Typography } from "@/components";
+import { CircularProgressBar } from "@/components";
 import { AllProviders } from "@/providers";
 
-const StyledView = styled.View`
+const View = styled.View`
   flex: 1;
   align-items: center;
   justify-content: center;
@@ -17,19 +16,9 @@ const StyledView = styled.View`
 const App: RNElement = () => {
   return (
     <AllProviders>
-      <StyledView>
-        <Typography variant="title">Example of title</Typography>
-        <Divider />
-        <View style={{ height: 10, width: 2 }} />
-        <Typography variant="subtitle">Example of subtitle</Typography>
-        <Divider />
-        <View style={{ height: 10, width: 2 }} />
-        <Typography variant="paragraph">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. At id accusantium temporibus porro cupiditate error
-          tenetur distinctio sequi nesciunt blanditiis amet in nihil praesentium unde, quaerat dolorem rem accusamus
-          aliquam!
-        </Typography>
-      </StyledView>
+      <View>
+        <CircularProgressBar progress={0.25} size={250} strokeWidth={20} />
+      </View>
     </AllProviders>
   );
 };
