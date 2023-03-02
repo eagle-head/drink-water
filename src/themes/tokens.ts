@@ -11,8 +11,10 @@ const colors = {
     success: "#38b000",
     warning: "#ffb800",
     error: "#d0421b",
+    errorLight: "#fed6d9",
     disabled: "#b8b8b8",
     divider: "#E0E0E0",
+    placeholder: "#7b8794",
   },
   dark: {
     primary: "#44a9f0",
@@ -24,8 +26,10 @@ const colors = {
     success: "#60bf68",
     warning: "#ffb800",
     error: "#f66454",
+    errorLight: "#fed6d9",
     disabled: "#b8b8b8",
     divider: "#F5F5F5",
+    placeholder: "#7b8794",
   },
 };
 

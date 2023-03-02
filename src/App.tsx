@@ -1,12 +1,14 @@
 import React from "react";
 
-import Icon from "react-native-vector-icons/FontAwesome5";
+import { type SubmitHandler, useForm } from "react-hook-form";
+import { Keyboard, View } from "react-native";
 import styled from "styled-components/native";
 
-import { IconButton } from "@/components";
+import { Button, Input } from "./components";
+
 import { AllProviders } from "@/providers";
 
-const View = styled.View`
+const StyledView = styled.View`
   flex: 1;
   align-items: center;
   justify-content: center;
@@ -14,14 +16,60 @@ const View = styled.View`
   padding-right: ${({ theme }) => theme.spacing[4]};
 `;
 
+type InputData = {
+  volume: string;
+};
+
 const App: RNElement = () => {
+  const {
+    handleSubmit,
+    control,
+    reset,
+    clearErrors,
+    formState: { isSubmitSuccessful },
+  } = useForm<InputData>();
+
+  const MIN = 50;
+  const MAX = 500;
+
+  const onSubmit: SubmitHandler<InputData> = React.useCallback(data => {
+    console.log(data);
+  }, []);
+
+  const onCancel = React.useCallback(() => {
+    Keyboard.dismiss();
+    clearErrors();
+    reset();
+  }, [clearErrors, reset]);
+
+  React.useEffect(() => {
+    if (!isSubmitSuccessful) {
+      return;
+    }
+
+    onCancel();
+  }, [isSubmitSuccessful, onCancel]);
+
   return (
     <AllProviders>
-      <View>
-        <IconButton>
-          <Icon name="glass-whiskey" size={60} color="#44a9f0" />
-        </IconButton>
-      </View>
+      <StyledView>
+        <Input
+          name="volume"
+          control={control}
+          defaultValue=""
+          rules={{
+            required: "This is required",
+            pattern: { message: "Only number are allowed", value: /^\d*[1-9]\d*$/ },
+            max: { message: `Maximum volume allowed is ${MAX}`, value: MAX },
+            min: { message: `Minimum volume allowed is ${MIN}`, value: MIN },
+          }}
+        />
+        <View style={{ flexDirection: "row", marginTop: 20 }}>
+          <Button label="Cancel" size="small" variant="outlined" onPress={onCancel} />
+          <View style={{ height: 20, width: 20 }} />
+          <Button label="Confirm" size="small" variant="outlined" onPress={handleSubmit(onSubmit)} />
+        </View>
+      </StyledView>
     </AllProviders>
   );
 };

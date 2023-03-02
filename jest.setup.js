@@ -19,6 +19,10 @@ jest.mock("react-native-reanimated", () => {
 // Silence the warning: Animated: `useNativeDriver` is not supported because the native animated module is missing
 jest.mock("react-native/Libraries/Animated/NativeAnimatedHelper");
 
+// Rect Hook Form Configuration
+global.window = {};
+global.window = global;
+
 // global setup for each test
 beforeEach(() => {
   jest.useFakeTimers();

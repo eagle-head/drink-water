@@ -8,7 +8,7 @@ import { useTheme } from "@/contexts";
 import { compact } from "@/utils";
 
 export const Button: RNElement<StyledButton> = React.memo(
-  ({ size, label, variant, isDisabled, isLoading, isPressed }) => {
+  ({ size, label, variant, isDisabled, isLoading, isPressed, ...rest }) => {
     const { theme } = useTheme();
 
     const activityIndicatorColor = (() => {
@@ -21,6 +21,7 @@ export const Button: RNElement<StyledButton> = React.memo(
 
     return (
       <Pressable
+        {...rest}
         android_ripple={{ color: isDisabled || isLoading ? "transparent" : theme.colors.primaryDark }}
         style={({ pressed }) => compact([pressed ? { opacity: 0.75 } : null])}
         testOnly_pressed={isPressed}
