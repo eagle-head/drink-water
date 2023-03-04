@@ -1,4 +1,6 @@
 import "@testing-library/jest-native/extend-expect";
+// include this line for mocking react-native-gesture-handler
+import "react-native-gesture-handler/jestSetup";
 import { cleanup } from "@testing-library/react-native";
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 require("react-native-reanimated/lib/reanimated2/jestUtils").setUpTests();

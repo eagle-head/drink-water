@@ -6,3 +6,4 @@ export * from "./Divider/Divider";
 export * from "./CircularProgressBar/CircularProgressBar";
 export * from "./IconButton/IconButton";
 export * from "./Input/Input";
+export * from "./Toast/Toast";

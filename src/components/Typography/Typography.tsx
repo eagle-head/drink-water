@@ -2,10 +2,13 @@ import React from "react";
 
 import { Text } from "./typography.styles";
 
-export const Typography: RNElement<TypographyProps> = React.memo(({ children, variant }) => {
+const Typography: RNElement<TypographyProps> = ({ children, variant }) => {
   return (
     <Text variant={variant} accessibilityRole="text">
       {children}
     </Text>
   );
-});
+};
+
+const MemoizedTypography = React.memo<TypographyProps>(Typography);
+export { MemoizedTypography as Typography };

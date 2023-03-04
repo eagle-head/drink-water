@@ -8,6 +8,7 @@ const View = styled.View`
   width: 100%;
 `;
 
-export const Divider: RNElement = React.memo(() => {
-  return <View testID="divider" />;
-});
+const Divider: RNElement = () => <View testID="divider" />;
+
+const MemoizedDivider = React.memo(Divider);
+export { MemoizedDivider as Divider };

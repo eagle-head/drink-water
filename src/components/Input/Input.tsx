@@ -29,7 +29,7 @@ export function Input<T extends FieldValues>({ control, name, rules, defaultValu
             autoCapitalize="none"
             keyboardType="numeric"
             placeholder="Insert here ..."
-            placeholderTextColor={error ? theme.colors.error : theme.colors.placeholder}
+            placeholderTextColor={error ? theme.colors.errorText : theme.colors.placeholder}
             accessibilityRole="search"
           />
           {error ? (
@@ -48,7 +48,7 @@ export default Input;
 
 const ErrorIcon = styled(MaterialIcons)`
   margin-right: 2px;
-  color: ${({ theme }) => theme.colors.error};
+  color: ${({ theme }) => theme.colors.errorText};
 `;
 
 const InputContainer = styled.View`
@@ -64,7 +64,7 @@ const ErrorContainer = styled.View`
 `;
 
 const ErrorText = styled.Text`
-  color: ${({ theme }) => theme.colors.error};
+  color: ${({ theme }) => theme.colors.errorText};
   font-size: 12px;
 `;
 
@@ -82,8 +82,8 @@ const TextInput = styled.TextInput<{ error: FieldError | undefined }>`
   ${({ error, theme }) =>
     error &&
     `
-      border-color: ${theme.colors.error};
-      background-color: ${theme.colors.errorLight};
+      border-color: ${theme.colors.errorText};
+      background-color: ${theme.colors.errorBackground};
       font-weight: 300;
     `}
 `;

@@ -11,13 +11,16 @@ declare module "styled-components/native" {
       title: string;
       subtitle: string;
       paragraph: string;
-      success: string;
       warning: string;
-      error: string;
       disabled: string;
       divider: string;
       placeholder: string;
-      errorLight: string;
+      successText: string;
+      successBackground: string;
+      successBorder: string;
+      errorText: string;
+      errorBackground: string;
+      errorBorder: string;
     };
     spacing: {
       [key: number]: string;

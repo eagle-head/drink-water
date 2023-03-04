@@ -12,7 +12,7 @@ type IconButtonProps = Prettify<
   } & Omit<PressableProps, "style">
 >;
 
-export const IconButton = React.memo(({ isPressed, ...rest }: IconButtonProps) => {
+const IconButton: RNElement<IconButtonProps> = ({ isPressed, ...rest }) => {
   return (
     <Pressable
       {...rest}
@@ -21,7 +21,10 @@ export const IconButton = React.memo(({ isPressed, ...rest }: IconButtonProps) =
       accessibilityRole="button"
     />
   );
-});
+};
+
+const MemoizedIconButton = React.memo<IconButtonProps>(IconButton);
+export { MemoizedIconButton as IconButton };
 
 const styles = StyleSheet.create({
   pressed: {
