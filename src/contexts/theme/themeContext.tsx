@@ -1,6 +1,7 @@
 import React from "react";
 import type { PropsWithChildren } from "react";
 
+import { useColorScheme } from "react-native";
 import { DefaultTheme, ThemeProvider as StyledProvider } from "styled-components/native";
 
 import { darkTheme, lightTheme } from "@/themes";
@@ -15,7 +16,8 @@ type ThemeContextType =
 const ThemeContext = React.createContext<ThemeContextType>(undefined);
 
 export const ThemeProvider: RNElement<PropsWithChildren> = ({ children }) => {
-  const [isDarkMode, setIsDarkMode] = React.useState(false);
+  const colorScheme = useColorScheme();
+  const [isDarkMode, setIsDarkMode] = React.useState(colorScheme === "dark");
 
   const toggleTheme = React.useCallback(() => {
     setIsDarkMode(prevState => !prevState);
