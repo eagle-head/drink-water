@@ -7,16 +7,30 @@ import { InputTestComponent } from "../InputTestComponent";
 
 import { fireEvent, render, screen, waitFor } from "@/tests/test-utils";
 
+let clearErrorsMock: jest.Mock;
+let resetMock: jest.Mock;
+let keyboardDismissMock: jest.SpyInstance;
+
 describe("Input", () => {
+  beforeEach(() => {
+    clearErrorsMock = jest.fn();
+    resetMock = jest.fn();
+    keyboardDismissMock = jest.spyOn(Keyboard, "dismiss");
+  });
+
+  afterEach(() => {
+    jest.restoreAllMocks(); // optional, restores all mocks to their original implementation
+  });
+
   test("should render correctly;", () => {
-    render(<InputTestComponent />);
+    render(<InputTestComponent clearErrors={clearErrorsMock} reset={resetMock} />);
 
     const input = screen.getByRole("search");
     expect(input).toBeDefined();
   });
 
   test("should show an error text component when simulating an input below 50 and above 500;", async () => {
-    render(<InputTestComponent />);
+    render(<InputTestComponent clearErrors={clearErrorsMock} reset={resetMock} />);
     const input = screen.getByRole("search");
 
     // simulating an input below 50
@@ -37,7 +51,7 @@ describe("Input", () => {
   });
 
   test("should only accept numbers;", async () => {
-    render(<InputTestComponent />);
+    render(<InputTestComponent clearErrors={clearErrorsMock} reset={resetMock} />);
 
     const input = screen.getByRole("search");
     fireEvent.changeText(input, "ab123c");
@@ -50,7 +64,7 @@ describe("Input", () => {
   });
 
   test("should show an error message when losing focus and not entering a valid number;", async () => {
-    render(<InputTestComponent />);
+    render(<InputTestComponent clearErrors={clearErrorsMock} reset={resetMock} />);
 
     const button = screen.getByRole("button", { name: /confirm/i });
     fireEvent.press(button);
@@ -59,13 +73,16 @@ describe("Input", () => {
     expect(errorText).toBeDefined();
   });
 
-  test("should clear the errors, reset the input and retract the keyboard when pressing cancel.", async () => {
-    // Mock the Keyboard.dismiss() method
-    jest.spyOn(Keyboard, "dismiss");
-    render(<InputTestComponent />);
+  it("should clear the errors, reset the input and retract the keyboard when pressing cancel.", async () => {
+    render(<InputTestComponent clearErrors={clearErrorsMock} reset={resetMock} />);
 
     const button = screen.getByRole("button", { name: /cancel/i });
     fireEvent.press(button);
-    await waitFor(() => expect(Keyboard.dismiss).toHaveBeenCalled());
+
+    await waitFor(() => {
+      expect(clearErrorsMock).toBeCalled();
+      expect(resetMock).toBeCalled();
+      expect(keyboardDismissMock).toBeCalled();
+    });
   });
 });

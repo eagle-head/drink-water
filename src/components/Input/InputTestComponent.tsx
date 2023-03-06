@@ -1,7 +1,7 @@
 /* eslint-disable react-native/no-inline-styles */
 import React from "react";
 
-import { type SubmitHandler, useForm } from "react-hook-form";
+import { type SubmitHandler, useForm, UseFormClearErrors, FieldValues, UseFormReset } from "react-hook-form";
 import { Keyboard, View } from "react-native";
 import styled from "styled-components/native";
 
@@ -11,12 +11,15 @@ type InputData = {
   volume: string;
 };
 
-export const InputTestComponent: RNElement = () => {
+type InputTestProps = {
+  clearErrors: UseFormClearErrors<FieldValues>;
+  reset: UseFormReset<FieldValues>;
+};
+
+export const InputTestComponent: RNElement<InputTestProps> = ({ clearErrors, reset }) => {
   const {
     handleSubmit,
     control,
-    reset,
-    clearErrors,
     formState: { isSubmitSuccessful },
   } = useForm<InputData>();
 
@@ -25,9 +28,10 @@ export const InputTestComponent: RNElement = () => {
   };
 
   const onCancel = React.useCallback(() => {
-    Keyboard.dismiss();
-    clearErrors();
-    reset();
+    const dismissKeyboard = Keyboard.dismiss();
+    const clearErrorsFunc = clearErrors();
+    const resetFunc = reset();
+    return { dismissKeyboard, clearErrorsFunc, resetFunc };
   }, [clearErrors, reset]);
 
   React.useEffect(() => {
