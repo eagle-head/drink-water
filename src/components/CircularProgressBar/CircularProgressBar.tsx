@@ -84,8 +84,10 @@ export const CircularProgressBar: RNElement<CircularProgressBarProps> = ({ progr
 const styles = StyleSheet.create({
   svg: {
     position: "absolute",
+    flex: 1,
   },
   container: {
+    flex: 1,
     backgroundColor: "transparent",
     alignItems: "center",
     justifyContent: "center",
