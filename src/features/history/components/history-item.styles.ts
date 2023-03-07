@@ -9,7 +9,7 @@ export const HistoryItemContainer = styled.View`
 
 export const TextView = styled.View`
   flex: 1;
-  margin-left: ${({ theme }) => theme.spacing[1]};
+  margin-left: ${({ theme }) => theme.spacing[4]};
 `;
 
 export const TextInnerView = styled.View`

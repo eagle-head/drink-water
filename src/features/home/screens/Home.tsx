@@ -25,8 +25,8 @@ export const HomeScreen: RNElement<HomeScreenProps> = () => {
           inActiveStrokeOpacity={0.2}
           inActiveStrokeColor={theme.colors.primary}
           activeStrokeColor={theme.colors.primaryDark}
-          progressValueColor={theme.colors.primary}
-          titleColor={theme.colors.primary}
+          progressValueColor={theme.colors.title}
+          titleColor={theme.colors.subtitle}
         />
       </CircularProgressBarView>
       <ButtonView>

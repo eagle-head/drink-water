@@ -18,7 +18,7 @@ const HistoryItem: RNElement<DrinkingItem> = ({ volume, unit, createdAt }) => {
         <Icon name="glass-whiskey" size={30} color={theme.colors.primary} />
       </IconButton>
       <TextView>
-        <Typography variant="subtitle">{`${volume} ${unit}`}</Typography>
+        <Typography variant="title">{`${volume} ${unit}`}</Typography>
         <Typography variant="subtitle">
           {format(new Date(createdAt), "hh:mm aa", {
             locale: enUS,
