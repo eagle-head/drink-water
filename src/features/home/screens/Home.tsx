@@ -15,20 +15,18 @@ export const HomeScreen: RNElement<HomeScreenProps> = () => {
       <CircularProgressBarView>
         <CircularProgress
           value={42}
+          radius={150}
           duration={1000}
+          valueSuffix={"%"}
+          titleFontSize={20}
+          title={"1050/2500 mL"}
+          activeStrokeWidth={20}
+          inActiveStrokeWidth={20}
           inActiveStrokeOpacity={0.2}
           inActiveStrokeColor={theme.colors.primary}
           activeStrokeColor={theme.colors.primaryDark}
           progressValueColor={theme.colors.primary}
-          radius={150}
-          title={"1050/2500 mL"}
-          valueSuffix={"%"}
-          titleFontSize={20}
-          activeStrokeWidth={20}
-          inActiveStrokeWidth={20}
-          // eslint-disable-next-line react-native/no-inline-styles
-          titleStyle={{ fontWeight: "500" }}
-          titleColor={theme.colors.primaryDark}
+          titleColor={theme.colors.primary}
         />
       </CircularProgressBarView>
       <ButtonView>
