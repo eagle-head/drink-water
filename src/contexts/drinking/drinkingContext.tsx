@@ -68,7 +68,7 @@ function useDrinking() {
   const context = React.useContext(DrinkingContext);
 
   if (context === undefined) {
-    throw new Error("useDrinking must be called from within an DrinkingProvider");
+    throw new Error("useDrinking must be called from within a DrinkingProvider");
   }
 
   return context;

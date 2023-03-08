@@ -8,7 +8,7 @@
     "prepare": "husky install .husky",
     "lint": "eslint --fix 'src/**/*.{ts,tsx,js,jsx}' && prettier --write 'src/**/*.{ts,tsx,js,jsx}'",
     "start": "react-native start --reset-cache",
-    "test": "jest --maxWorkers=50%  --config=./jest.config.js",
+    "test": "jest --maxWorkers=50% --verbose --config=./jest.config.js",
     "test:coverage": "jest --clearCache && jest --config ./jest.config.js --maxWorkers=50% --coverage",
     "test:watch": "jest --watch --maxWorkers=50%  --config=./jest.config.js"
   },

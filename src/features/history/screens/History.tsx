@@ -2,7 +2,7 @@ import React from "react";
 
 import { FlatList } from "react-native";
 
-import HistoryItem from "../components/HistoryItem";
+import { HistoryItem } from "../components/HistoryItem";
 
 import { HistoryContainer } from "./history.styles";
 

@@ -9,7 +9,7 @@ import { HistoryItemContainer, TextView } from "./history-item.styles";
 import { IconButton, Typography } from "@/components";
 import { useTheme } from "@/contexts";
 
-const HistoryItem: RNElement<DrinkingItem> = ({ volume, unit, createdAt }) => {
+export const HistoryItem: RNElement<DrinkingItem> = ({ volume, unit, createdAt }) => {
   const { theme } = useTheme();
 
   return (
@@ -34,5 +34,3 @@ const HistoryItem: RNElement<DrinkingItem> = ({ volume, unit, createdAt }) => {
     </HistoryItemContainer>
   );
 };
-
-export default HistoryItem;

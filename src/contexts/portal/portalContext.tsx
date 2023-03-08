@@ -1,54 +1,67 @@
-import React, { type PropsWithChildren } from "react";
+import React from "react";
+import type { PropsWithChildren } from "react";
+
+import { View, StyleSheet } from "react-native";
 
 const PortalContext = React.createContext<PortalContextType>(undefined);
 
-function PortalProvider({ children }: PropsWithChildren) {
-  const [uniqueId, setUniqueId] = React.useState(Date.now().toString());
-  const [portalContent, setPortalContent] = React.useState<PortalContent[]>([]);
+export const PortalProvider: RNElement<PropsWithChildren> = ({ children }) => {
+  const [portalComponent, setPortalComponent] = React.useState<React.ReactNode | null>(null);
+  const portalRef = React.useRef<View>(null);
 
-  function addPortalContent(content: React.ReactNode) {
-    const newPortalContent = { id: uniqueId, content };
-    setUniqueId(Date.now().toString());
-    setPortalContent([...portalContent, newPortalContent]);
-  }
+  React.useEffect(() => {
+    if (portalComponent) {
+      portalRef.current?.setNativeProps({
+        pointerEvents: "auto",
+      });
 
-  function removeLastPortalContent() {
-    const newPortalContent = [...portalContent];
-    newPortalContent.pop();
-    setPortalContent(newPortalContent);
-  }
+      return;
+    }
 
-  const value = { addPortalContent, removeLastPortalContent };
+    portalRef.current?.setNativeProps({
+      pointerEvents: "none",
+    });
+  }, [portalComponent]);
+
+  const mount = (component: React.ReactNode) => {
+    setPortalComponent(component);
+  };
+
+  const unmount = () => {
+    setPortalComponent(null);
+  };
 
   return (
-    <PortalContext.Provider value={value}>
+    <PortalContext.Provider value={{ mount, unmount }}>
       {children}
-      {portalContent.length > 0
-        ? portalContent.map(content => <React.Fragment key={content.id}>{content.content}</React.Fragment>)
-        : null}
+      {portalComponent ? (
+        <View ref={portalRef} style={styles.container}>
+          {portalComponent}
+        </View>
+      ) : null}
     </PortalContext.Provider>
   );
-}
+};
 
-function usePortal() {
+export const usePortal = () => {
   const context = React.useContext(PortalContext);
 
   if (context === undefined) {
-    throw new Error("usePortal must be called from within an PortalProvider");
+    throw new Error("usePortal must be called from within a PortalProvider");
   }
 
   return context;
-}
+};
 
-export { PortalProvider, usePortal };
+const styles = StyleSheet.create({
+  container: {
+    position: "absolute",
+    top: 0,
+    left: 0,
+    bottom: 0,
+    right: 0,
+    zIndex: 1000,
 
-// EXAMPLE
-
-// const handleModal = () => {
-//   addPortalContent(
-//     <View style={{ width: 300, backgroundColor: "pink", position: "absolute" }}>
-//       <Text>This is an example portal component!</Text>
-//       <Button variant="primary" size="large" title="drink" onPress={() => removeLastPortalContent()} />
-//     </View>
-//   );
-// };
+    backgroundColor: "rgba(0,0,0, 0.75)",
+  },
+});
