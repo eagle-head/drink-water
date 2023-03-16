@@ -15,16 +15,14 @@ export function Input<T extends FieldValues>({ control, name, rules, defaultValu
       name={name}
       rules={rules}
       defaultValue={defaultValue}
-      render={({ field: { onChange, value, ref, onBlur }, fieldState: { error } }) => (
+      render={({ field: { onChange, value, onBlur }, fieldState: { error } }) => (
         <InputContainer>
           <TextInput
             {...textInputProps}
-            ref={ref}
             error={error}
             value={value}
             onBlur={onBlur}
             onChangeText={onChange}
-            autoFocus={true}
             autoCorrect={false}
             autoCapitalize="none"
             keyboardType="numeric"

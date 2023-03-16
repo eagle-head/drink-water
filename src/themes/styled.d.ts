@@ -21,6 +21,7 @@ declare module "styled-components/native" {
       errorText: string;
       errorBackground: string;
       errorBorder: string;
+      modalBackground: string;
     };
     spacing: {
       [key: number]: string;

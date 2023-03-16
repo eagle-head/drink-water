@@ -13,6 +13,7 @@ const colors = {
     divider: "#E0E0E0",
     placeholder: "#7b8794",
     successText: "#007E33",
+    modalBackground: "#f8f9fA",
     successBackground: "#E0F2F1",
     successBorder: "#007E33",
     errorText: "#FF5A5F",
@@ -36,6 +37,7 @@ const colors = {
     errorText: "#FF5A5F",
     errorBackground: "#FFEBEE",
     errorBorder: "#FF5A5F",
+    modalBackground: "#f8f9fA",
   },
 };
 

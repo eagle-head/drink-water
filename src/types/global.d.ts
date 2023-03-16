@@ -1,6 +1,6 @@
+/* eslint-disable @typescript-eslint/ban-types */
 import { ListRenderItemInfo } from "react-native";
 
-/* eslint-disable @typescript-eslint/ban-types */
 export {};
 
 declare global {

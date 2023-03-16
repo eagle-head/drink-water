@@ -25,16 +25,16 @@ const initialState: AlarmState = (() => {
 
 function alarmReducer(draft: AlarmState, action: AlarmAction): void {
   switch (action.type) {
-    case "TOOGLED":
+    case "ALARM/TOOGLED":
       draft.isItOn = !draft.isItOn;
       break;
-    case "TIME/START":
+    case "ALARM/START":
       draft.startTime = action.payload;
       break;
-    case "TIME/END":
+    case "ALARM/END":
       draft.endTime = action.payload;
       break;
-    case "TIME/INTERVAL":
+    case "ALARM/INTERVAL":
       draft.interval = action.payload;
       break;
     default:
@@ -53,7 +53,7 @@ function AlarmProvider(props: PropsWithChildren) {
       differenceInMinutes(new Date(state.endTime), new Date(state.startTime)) < 15
     ) {
       const newEndTime = addMinutes(new Date(state.startTime), 15);
-      dispatch({ type: "TIME/END", payload: newEndTime });
+      dispatch({ type: "ALARM/END", payload: newEndTime });
     }
   }, [state.startTime, state.endTime, dispatch]);
 

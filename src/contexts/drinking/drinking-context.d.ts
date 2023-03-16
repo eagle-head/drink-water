@@ -4,11 +4,11 @@ export {};
 
 declare global {
   type DrinkingAction =
-    | { type: "TOOGLED" }
-    | { type: "DELETED"; payload: Date }
-    | { type: "GOAL_CHANGED"; payload: number }
-    | { type: "UPDATED"; payload: DrinkingItem }
-    | { type: "ADDED"; payload: Omit<DrinkingItem, "createdAt"> };
+    | { type: "DRINKING/TOOGLED" }
+    | { type: "DRINKING/DELETED"; payload: Date }
+    | { type: "DRINKING/GOAL_CHANGED"; payload: number }
+    | { type: "DRINKING/UPDATED"; payload: DrinkingItem }
+    | { type: "DRINKING/ADDED"; payload: Omit<DrinkingItem, "createdAt"> };
 
   type DrinkingState = {
     unit: VolumeUnit;

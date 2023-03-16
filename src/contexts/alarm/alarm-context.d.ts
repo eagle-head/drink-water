@@ -17,18 +17,18 @@ declare global {
 
   type AlarmAction =
     | {
-        type: "TOOGLED";
+        type: "ALARM/TOOGLED";
       }
     | {
-        type: "TIME/START";
+        type: "ALARM/START";
         payload: Date;
       }
     | {
-        type: "TIME/END";
+        type: "ALARM/END";
         payload: Date;
       }
     | {
-        type: "TIME/INTERVAL";
+        type: "ALARM/INTERVAL";
         payload: number;
       };
 }

@@ -33,20 +33,20 @@ const initialState: DrinkingState = (() => {
 
 function drinkingReducer(draft: DrinkingState, action: DrinkingAction): void {
   switch (action.type) {
-    case "TOOGLED":
+    case "DRINKING/TOOGLED":
       draft.unit = draft.unit === "mL" ? "fl oz" : "mL";
       break;
-    case "GOAL_CHANGED":
+    case "DRINKING/GOAL_CHANGED":
       draft.goal = action.payload;
       break;
-    case "ADDED":
+    case "DRINKING/ADDED":
       const newDrinkingItem = { ...action.payload, createdAt: new Date() };
       draft.listItems.push(newDrinkingItem);
       break;
-    case "DELETED":
+    case "DRINKING/DELETED":
       draft.listItems = draft.listItems.filter(item => item.createdAt !== action.payload);
       break;
-    case "UPDATED":
+    case "DRINKING/UPDATED":
       const objIndex = draft.listItems.findIndex(item => item.createdAt === action.payload.createdAt);
       draft.listItems[objIndex].volume = action.payload.volume;
       break;
