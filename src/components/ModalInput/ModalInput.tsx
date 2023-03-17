@@ -66,7 +66,10 @@ export const ModalInput: RNElement<ModalInputProps> = ({
       return;
     }
 
-    alarmDispatch({ type: "ALARM/INTERVAL", payload: Number(volume) });
+    if (typeDispatch === "interval") {
+      alarmDispatch({ type: "ALARM/INTERVAL", payload: Number(volume) });
+      return;
+    }
   });
 
   const handleClose = React.useCallback(() => {

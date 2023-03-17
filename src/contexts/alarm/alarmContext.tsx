@@ -5,7 +5,8 @@ import { useImmerReducer } from "use-immer";
 
 import { getObjectFromAlarmStorage, setObjectToAlarmStorage } from "@/storage";
 
-const AlarmContext = React.createContext<AlarmContextType>(undefined);
+// This export should be used strictly for unit testing.
+export const AlarmContext = React.createContext<AlarmContextType>(undefined);
 
 const initialState: AlarmState = (() => {
   const alarmStoraged = getObjectFromAlarmStorage<AlarmState>();
