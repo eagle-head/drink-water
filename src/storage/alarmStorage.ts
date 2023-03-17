@@ -20,3 +20,7 @@ export function getObjectFromAlarmStorage<T>(): T | undefined {
 
   return JSON.parse(STORAGED_OBJECT) as T;
 }
+
+export const clearAlarmStorage = () => {
+  AlarmStorage.clearAll();
+};
