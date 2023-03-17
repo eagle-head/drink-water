@@ -7,7 +7,7 @@ import { render } from "@testing-library/react-native";
 import { StatusBar, useColorScheme } from "react-native";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 
-import { AlarmProvider, DrinkingProvider, PortalProvider, ThemeProvider } from "@/contexts";
+import { AlarmProvider, DrinkingProvider, ThemeProvider } from "@/contexts";
 
 type Options = Parameters<typeof render>[1];
 
@@ -19,13 +19,11 @@ const AllTheProviders: RNElement<PropsWithChildren> = ({ children }) => {
       <StatusBar barStyle={theme === "dark" ? "light-content" : "dark-content"} />
       <GestureHandlerRootView style={{ flex: 1 }}>
         <ThemeProvider>
-          <PortalProvider>
-            <DrinkingProvider>
-              <AlarmProvider>
-                <NavigationContainer>{children}</NavigationContainer>
-              </AlarmProvider>
-            </DrinkingProvider>
-          </PortalProvider>
+          <DrinkingProvider>
+            <AlarmProvider>
+              <NavigationContainer>{children}</NavigationContainer>
+            </AlarmProvider>
+          </DrinkingProvider>
         </ThemeProvider>
       </GestureHandlerRootView>
     </>
