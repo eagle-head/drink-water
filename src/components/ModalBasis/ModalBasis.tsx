@@ -20,7 +20,9 @@ export const ModalBasis: RNElement<ModalBasisProps> = ({ children, visible, ...r
         reducedTransparencyFallbackColor="white"
       />
       <View style={styles.container}>
-        <View style={[styles.innerContainer, isIos ? { top: height / 3.5 } : { justifyContent: "center" }]}>
+        <View
+          style={[styles.innerContainer, isIos ? { top: height / 3.5 } : { justifyContent: "center" }]}
+          testID="modal-view-container">
           {children}
         </View>
       </View>
