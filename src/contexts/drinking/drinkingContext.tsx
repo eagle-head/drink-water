@@ -6,7 +6,8 @@ import { useImmerReducer } from "use-immer";
 import { getObjectFromDrinkingStorage, setObjectToDrinkingStorage } from "@/storage";
 import { cloneObject } from "@/utils";
 
-const DrinkingContext = React.createContext<DrinkingContextType>(undefined);
+// This export should be used strictly for unit testing.
+export const DrinkingContext = React.createContext<DrinkingContextType>(undefined);
 
 const initialState: DrinkingState = (() => {
   const drinkingItemsList = getObjectFromDrinkingStorage<DrinkingState>();
