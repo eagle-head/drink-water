@@ -48,6 +48,10 @@ function drinkingReducer(draft: DrinkingState, action: DrinkingAction): void {
       draft.listItems = draft.listItems.filter(item => item.createdAt !== action.payload);
       break;
     case "DRINKING/UPDATED":
+      if (draft.listItems.length <= 0) {
+        break;
+      }
+
       const objIndex = draft.listItems.findIndex(item => item.createdAt === action.payload.createdAt);
       draft.listItems[objIndex].volume = action.payload.volume;
       break;

@@ -20,3 +20,7 @@ export function getObjectFromDrinkingStorage<T>(): T | undefined {
 
   return JSON.parse(STORAGED_OBJECT) as T;
 }
+
+export const clearDrinkingStorage = () => {
+  DrinkingStorage.clearAll();
+};
