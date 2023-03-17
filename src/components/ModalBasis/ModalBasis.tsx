@@ -1,14 +1,11 @@
-/* eslint-disable react-native/no-inline-styles */
 import React from "react";
 
 import { BlurView } from "@react-native-community/blur";
-import { Dimensions, Modal, Platform, StyleSheet, View } from "react-native";
+import { Modal, StyleSheet } from "react-native";
 import type { ModalProps } from "react-native";
+import styled from "styled-components/native";
 
 type ModalBasisProps = Omit<ModalProps, "style">;
-
-const isIos = Platform.OS === "ios";
-const { height } = Dimensions.get("window");
 
 export const ModalBasis: RNElement<ModalBasisProps> = ({ children, visible, ...rest }) => {
   return (
@@ -19,24 +16,21 @@ export const ModalBasis: RNElement<ModalBasisProps> = ({ children, visible, ...r
         blurAmount={5}
         reducedTransparencyFallbackColor="white"
       />
-      <View style={styles.container}>
-        <View
-          style={[styles.innerContainer, isIos ? { top: height / 3.5 } : { justifyContent: "center" }]}
-          testID="modal-view-container">
-          {children}
-        </View>
-      </View>
+      <ModalBasisView>
+        <ModalBasisInnerView testID="modal-ModalBasisInnerView-container">{children}</ModalBasisInnerView>
+      </ModalBasisView>
     </Modal>
   );
 };
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-  innerContainer: {
-    flex: 1,
-    alignItems: "center",
-    paddingHorizontal: 16,
-  },
-});
+const ModalBasisView = styled.View`
+  flex: 1;
+`;
+
+const ModalBasisInnerView = styled.View`
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+  padding-left: ${({ theme }) => theme.spacing[4]};
+  padding-right: ${({ theme }) => theme.spacing[4]};
+`;

@@ -1,6 +1,6 @@
 import React from "react";
 
-import { View, Text, Dimensions } from "react-native";
+import { Text } from "react-native";
 
 import { ModalBasis } from "../ModalBasis";
 
@@ -17,18 +17,5 @@ describe("ModalBasis", () => {
     const text = screen.getByRole("text", { name: /test content/i });
 
     expect(text).toBeTruthy();
-  });
-
-  it("applies platform-specific styles", () => {
-    render(
-      <ModalBasis visible>
-        <View />
-      </ModalBasis>
-    );
-
-    const childElement = screen.getByTestId("modal-view-container");
-    const appliedStyles = childElement.props.style[1].top;
-
-    expect(appliedStyles).toBe(Dimensions.get("window").height / 3.5);
   });
 });
