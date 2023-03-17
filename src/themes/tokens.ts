@@ -2,42 +2,44 @@ import { DefaultTheme } from "styled-components/native";
 
 const colors = {
   light: {
-    primary: "#44a9f0",
-    primaryDark: "#0884db",
+    primary: "#4AC4FF", // A slightly lighter and more vibrant primary color
+    primaryDark: "#0892E1", // A slightly darker primary color to create contrast
     secondary: "#ffffff",
     title: "#1a1a1a",
     subtitle: "#6e6e6e",
     paragraph: "#4a4a4a",
-    warning: "#ffb800",
+    accent: "#A8E6CF", // Added an accent color related to water and freshness
+    warning: "#FFCA28", // A more vibrant warning color
     disabled: "#b8b8b8",
     divider: "#E0E0E0",
     placeholder: "#7b8794",
-    successText: "#007E33",
+    successText: "#009688", // A more consistent success text color
     modalBackground: "#f8f9fA",
     successBackground: "#E0F2F1",
-    successBorder: "#007E33",
-    errorText: "#FF5A5F",
+    successBorder: "#009688", // A more consistent success border color
+    errorText: "#F44336", // A more consistent error text color
     errorBackground: "#FFEBEE",
-    errorBorder: "#FF5A5F",
+    errorBorder: "#F44336", // A more consistent error border color
   },
   dark: {
-    primary: "#44a9f0",
-    primaryDark: "#0884db",
-    secondary: "#1a1a1a",
+    primary: "#1E88E5", // A darker primary color for contrast in dark mode
+    primaryDark: "#1565C0", // A deeper darker primary color for contrast
+    secondary: "#424242", // A dark gray secondary color for backgrounds
     title: "#ffffff",
-    subtitle: "#bdbdbd",
-    paragraph: "#f2f2f2",
-    warning: "#ffb800",
-    disabled: "#b8b8b8",
-    divider: "#F5F5F5",
-    placeholder: "#7b8794",
-    successText: "#007E33",
-    successBackground: "#E0F2F1",
-    successBorder: "#007E33",
-    errorText: "#FF5A5F",
-    errorBackground: "#FFEBEE",
-    errorBorder: "#FF5A5F",
-    modalBackground: "#f8f9fA",
+    subtitle: "#BDBDBD",
+    paragraph: "#9E9E9E",
+    accent: "#80DEEA", // A lighter version of the accent color for better visibility
+    warning: "#FFC107", // A more visible warning color in dark mode
+    disabled: "#757575",
+    divider: "#616161",
+    placeholder: "#9E9E9E",
+    successText: "#4CAF50", // A lighter success text color for better visibility
+    modalBackground: "#303030", // A dark gray background for modals
+    successBackground: "#1B5E20", // A dark green background for success elements
+    successBorder: "#4CAF50", // A lighter success border color for better visibility
+    errorText: "#E53935", // A lighter error text color for better visibility
+    errorBackground: "#B71C1C", // A dark red background for error elements
+    errorBorder: "#E53935", // A lighter error border color for better visibility
   },
 };
 
