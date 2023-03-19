@@ -1,4 +1,5 @@
 import React from "react";
+import type { PropsWithChildren } from "react";
 
 import { addMinutes, differenceInMinutes } from "date-fns";
 import { useImmerReducer } from "use-immer";
@@ -45,7 +46,7 @@ function alarmReducer(draft: AlarmState, action: AlarmAction): void {
   setObjectToAlarmStorage(draft);
 }
 
-function AlarmProvider({ children, callback }: AlarmProviderProps) {
+function AlarmProvider({ children }: PropsWithChildren) {
   const [state, dispatch] = useImmerReducer(alarmReducer, initialState);
 
   React.useEffect(() => {
@@ -56,11 +57,7 @@ function AlarmProvider({ children, callback }: AlarmProviderProps) {
       const newEndTime = addMinutes(new Date(state.startTime), 15);
       dispatch({ type: "ALARM/END", payload: newEndTime });
     }
-
-    if (callback) {
-      callback();
-    }
-  }, [state.startTime, state.endTime, dispatch, callback]);
+  }, [state.startTime, state.endTime, dispatch]);
 
   const value = { state, dispatch };
   return <AlarmContext.Provider value={value}>{children}</AlarmContext.Provider>;

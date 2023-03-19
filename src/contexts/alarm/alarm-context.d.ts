@@ -1,12 +1,6 @@
-import { PropsWithChildren } from "react";
-
 export {};
 
 declare global {
-  type AlarmProviderProps = PropsWithChildren & {
-    callback?: () => void;
-  };
-
   type AlarmContextType =
     | {
         state: AlarmState;
