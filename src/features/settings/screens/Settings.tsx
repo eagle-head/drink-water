@@ -11,20 +11,27 @@ import { Divider, ModalInput, Typography } from "@/components";
 import { useAlarm, useDrinking } from "@/contexts";
 
 export const SettingsScreen: RNElement<SettingsScreenProps> = () => {
-  const {
-    state: { interval, startTime, endTime },
-    dispatch: alarmDispatch,
-  } = useAlarm();
-  const { state, dispatch: drinkingDispatch } = useDrinking();
+  const { state: alarmState, dispatch: alarmDispatch } = useAlarm();
+  const { state: drinkingState, dispatch: drinkingDispatch } = useDrinking();
   const [isGoalVolumeModalOpened, setIsGoalVolumeModalOpened] = React.useState<boolean>(false);
   const [isIntervalTimeModalOpened, setIsIntervalTimeModalOpened] = React.useState<boolean>(false);
   const [isStartTimeModalOpened, setIsStartTimeModalOpened] = React.useState<boolean>(false);
   const [isEndTimeModalOpened, setIsEndTimeModalOpened] = React.useState<boolean>(false);
-  const [isSwitchEnabled, setIsSwitchEnabled] = React.useState<boolean>(state.unit === "mL" ? false : true);
+  const [isUnitSwitchEnabled, setIsUnitSwitchEnabled] = React.useState<boolean>(
+    drinkingState.unit === "mL" ? false : true
+  );
+  const [isAlarmSwitchEnabled, setIsAlarmSwitchEnabled] = React.useState<boolean>(
+    alarmState.power === "OFF" ? false : true
+  );
 
-  function toogleSwitch() {
-    setIsSwitchEnabled(prevState => !prevState);
+  function toogleUnitSwitch() {
+    setIsUnitSwitchEnabled(prevState => !prevState);
     drinkingDispatch({ type: "DRINKING/TOOGLED" });
+  }
+
+  function toogleAlarmSwitch() {
+    setIsAlarmSwitchEnabled(prevState => !prevState);
+    alarmDispatch({ type: "ALARM/TOOGLED" });
   }
 
   return (
@@ -32,14 +39,29 @@ export const SettingsScreen: RNElement<SettingsScreenProps> = () => {
       <SettingsList>
         <View style={styles.root}>
           <View>
-            <Typography variant="title">Unit</Typography>
-            <Typography variant="subtitle">{state.unit}</Typography>
+            <Typography variant="title">Power</Typography>
+            <Typography variant="subtitle">{alarmState.power}</Typography>
           </View>
-          <View style={styles.containerUnit}>
+          <View style={styles.containerToggle}>
             <Switch
               trackColor={{ false: "#f3e9ec" }}
-              value={isSwitchEnabled}
-              onChange={toogleSwitch}
+              value={isAlarmSwitchEnabled}
+              onChange={toogleAlarmSwitch}
+              accessibilityRole="togglebutton"
+            />
+          </View>
+        </View>
+        <Divider />
+        <View style={styles.root}>
+          <View>
+            <Typography variant="title">Unit</Typography>
+            <Typography variant="subtitle">{drinkingState.unit}</Typography>
+          </View>
+          <View style={styles.containerToggle}>
+            <Switch
+              trackColor={{ false: "#f3e9ec" }}
+              value={isUnitSwitchEnabled}
+              onChange={toogleUnitSwitch}
               accessibilityRole="togglebutton"
             />
           </View>
@@ -49,7 +71,7 @@ export const SettingsScreen: RNElement<SettingsScreenProps> = () => {
         <TouchableOpacity style={styles.root} onPress={() => setIsGoalVolumeModalOpened(true)}>
           <View>
             <Typography variant="title">Goal Volume</Typography>
-            <Typography variant="subtitle">{`${state.goal} ${state.unit}`}</Typography>
+            <Typography variant="subtitle">{`${drinkingState.goal} ${drinkingState.unit}`}</Typography>
           </View>
         </TouchableOpacity>
         {/* Goal Volume Item */}
@@ -58,7 +80,7 @@ export const SettingsScreen: RNElement<SettingsScreenProps> = () => {
         <TouchableOpacity style={styles.root} onPress={() => setIsStartTimeModalOpened(true)}>
           <View>
             <Typography variant="title">Start time</Typography>
-            <Typography variant="subtitle">{`${format(new Date(startTime), "hh:mm aa", {
+            <Typography variant="subtitle">{`${format(new Date(alarmState.startTime), "hh:mm aa", {
               locale: enUS,
             })}`}</Typography>
           </View>
@@ -67,7 +89,7 @@ export const SettingsScreen: RNElement<SettingsScreenProps> = () => {
         <TouchableOpacity style={styles.root} onPress={() => setIsEndTimeModalOpened(true)}>
           <View>
             <Typography variant="title">End time</Typography>
-            <Typography variant="subtitle">{`${format(new Date(endTime), "hh:mm aa", {
+            <Typography variant="subtitle">{`${format(new Date(alarmState.endTime), "hh:mm aa", {
               locale: enUS,
             })}`}</Typography>
           </View>
@@ -76,7 +98,7 @@ export const SettingsScreen: RNElement<SettingsScreenProps> = () => {
         <TouchableOpacity style={styles.root} onPress={() => setIsIntervalTimeModalOpened(true)}>
           <View>
             <Typography variant="title">Interval time</Typography>
-            <Typography variant="subtitle">{`${interval} minutes`}</Typography>
+            <Typography variant="subtitle">{`${alarmState.interval} minutes`}</Typography>
           </View>
         </TouchableOpacity>
         {/* Alarm Settings Item */}
@@ -85,7 +107,7 @@ export const SettingsScreen: RNElement<SettingsScreenProps> = () => {
         <DatePicker
           modal
           open={isStartTimeModalOpened}
-          date={new Date(startTime)}
+          date={new Date(alarmState.startTime)}
           mode="time"
           locale="en-US"
           onConfirm={date => {
@@ -101,7 +123,7 @@ export const SettingsScreen: RNElement<SettingsScreenProps> = () => {
         <DatePicker
           modal
           open={isEndTimeModalOpened}
-          date={new Date(endTime)}
+          date={new Date(alarmState.endTime)}
           mode="time"
           locale="en-US"
           onConfirm={date => {
@@ -142,7 +164,7 @@ const styles = StyleSheet.create({
     paddingVertical: 8,
     flexDirection: "row",
   },
-  containerUnit: {
+  containerToggle: {
     flex: 1,
     alignItems: "flex-end",
     justifyContent: "center",
