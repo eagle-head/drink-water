@@ -22,7 +22,7 @@ describe("ModalInput", () => {
     startTime: new Date("2023-03-17T08:00:00.000Z"),
     endTime: new Date("2023-03-17T22:00:00.000Z"),
     interval: 60,
-    isItOn: true,
+    power: "ON",
   };
 
   function renderModalInput(typeDispatch: TypeDispatch, testDrinkingItem?: DrinkingItem) {

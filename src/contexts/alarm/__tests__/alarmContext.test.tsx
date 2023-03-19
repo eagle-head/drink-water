@@ -7,6 +7,7 @@ import { addMinutes } from "date-fns";
 import { AlarmProvider, useAlarm } from "../alarmContext";
 
 import { clearAlarmStorage } from "@/storage";
+import { waitFor } from "@/tests/test-utils";
 
 const wrapper = ({ children }: PropsWithChildren) => <AlarmProvider>{children}</AlarmProvider>;
 
@@ -18,11 +19,11 @@ describe("AlarmContext", () => {
   it("should initialize the context with the initial state", () => {
     const { result } = renderHook(() => useAlarm(), { wrapper });
 
-    const expectedInitialState = {
+    const expectedInitialState: AlarmState = {
       startTime: expect.any(Date),
       endTime: expect.any(Date),
-      interval: 60,
-      isItOn: false,
+      interval: 15,
+      power: "OFF",
     };
 
     expect(result.current.state).toMatchObject(expectedInitialState);
@@ -35,19 +36,19 @@ describe("AlarmContext", () => {
       result.current.dispatch({ type: "ALARM/TOOGLED" });
     });
 
-    expect(result.current.state.isItOn).toBe(true);
+    expect(result.current.state.power).toBe("ON");
 
     act(() => {
       result.current.dispatch({ type: "ALARM/TOOGLED" });
     });
 
-    expect(result.current.state.isItOn).toBe(false);
+    expect(result.current.state.power).toBe("OFF");
   });
 
   it("should update startTime when dispatching ALARM/START", () => {
     const { result } = renderHook(() => useAlarm(), { wrapper });
 
-    const newStartTime = new Date("2023-03-18T09:00:00.000Z");
+    const newStartTime = new Date();
 
     act(() => {
       result.current.dispatch({ type: "ALARM/START", payload: newStartTime });
@@ -56,16 +57,17 @@ describe("AlarmContext", () => {
     expect(result.current.state.startTime).toEqual(newStartTime);
   });
 
-  it("should update endTime when dispatching ALARM/END", () => {
-    const { result } = renderHook(() => useAlarm(), { wrapper });
+  it("should update endTime when dispatching ALARM/END", async () => {
+    // This mock date must always be in the future of the current day it is being tested.
+    const newEndTime = new Date("2024-03-18T18:00:00.000Z");
 
-    const newEndTime = new Date("2023-03-18T18:00:00.000Z");
+    const { result } = renderHook(() => useAlarm(), { wrapper });
 
     act(() => {
       result.current.dispatch({ type: "ALARM/END", payload: newEndTime });
     });
 
-    expect(result.current.state.endTime).toEqual(newEndTime);
+    await waitFor(() => expect(result.current.state.endTime).toEqual(newEndTime));
   });
 
   it("should update interval when dispatching ALARM/INTERVAL", () => {

@@ -1,6 +1,12 @@
+import { PropsWithChildren } from "react";
+
 export {};
 
 declare global {
+  type AlarmProviderProps = PropsWithChildren & {
+    callback?: () => void;
+  };
+
   type AlarmContextType =
     | {
         state: AlarmState;
@@ -12,7 +18,7 @@ declare global {
     startTime: Date;
     endTime: Date;
     interval: number;
-    isItOn: boolean;
+    power: "ON" | "OFF";
   };
 
   type AlarmAction =

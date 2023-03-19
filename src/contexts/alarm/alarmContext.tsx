@@ -1,4 +1,4 @@
-import React, { type PropsWithChildren } from "react";
+import React from "react";
 
 import { addMinutes, differenceInMinutes } from "date-fns";
 import { useImmerReducer } from "use-immer";
@@ -15,8 +15,8 @@ const initialState: AlarmState = (() => {
     return {
       startTime: new Date(),
       endTime: addMinutes(new Date(), 15),
-      interval: 60,
-      isItOn: false,
+      interval: 15,
+      power: "OFF",
     };
   }
 
@@ -27,7 +27,7 @@ const initialState: AlarmState = (() => {
 function alarmReducer(draft: AlarmState, action: AlarmAction): void {
   switch (action.type) {
     case "ALARM/TOOGLED":
-      draft.isItOn = !draft.isItOn;
+      draft.power = draft.power === "ON" ? "OFF" : "ON";
       break;
     case "ALARM/START":
       draft.startTime = action.payload;
@@ -45,7 +45,7 @@ function alarmReducer(draft: AlarmState, action: AlarmAction): void {
   setObjectToAlarmStorage(draft);
 }
 
-function AlarmProvider(props: PropsWithChildren) {
+function AlarmProvider({ children, callback }: AlarmProviderProps) {
   const [state, dispatch] = useImmerReducer(alarmReducer, initialState);
 
   React.useEffect(() => {
@@ -56,10 +56,14 @@ function AlarmProvider(props: PropsWithChildren) {
       const newEndTime = addMinutes(new Date(state.startTime), 15);
       dispatch({ type: "ALARM/END", payload: newEndTime });
     }
-  }, [state.startTime, state.endTime, dispatch]);
+
+    if (callback) {
+      callback();
+    }
+  }, [state.startTime, state.endTime, dispatch, callback]);
 
   const value = { state, dispatch };
-  return <AlarmContext.Provider value={value} {...props} />;
+  return <AlarmContext.Provider value={value}>{children}</AlarmContext.Provider>;
 }
 
 function useAlarm() {
