@@ -17,7 +17,7 @@ declare global {
 
   type AlarmAction =
     | {
-        type: "ALARM/TOOGLED";
+        type: "ALARM/TOGGLED";
       }
     | {
         type: "ALARM/START";

@@ -29,28 +29,28 @@ describe("AlarmContext", () => {
     expect(result.current.state).toMatchObject(expectedInitialState);
   });
 
-  it("should toggle isItOn when dispatching ALARM/TOOGLED", () => {
+  it("should toggle power when dispatching ALARM/TOGGLED", async () => {
     const { result } = renderHook(() => useAlarm(), { wrapper });
 
-    act(() => {
-      result.current.dispatch({ type: "ALARM/TOOGLED" });
+    await act(async () => {
+      result.current.dispatch({ type: "ALARM/TOGGLED" });
     });
 
     expect(result.current.state.power).toBe("ON");
 
-    act(() => {
-      result.current.dispatch({ type: "ALARM/TOOGLED" });
+    await act(async () => {
+      result.current.dispatch({ type: "ALARM/TOGGLED" });
     });
 
     expect(result.current.state.power).toBe("OFF");
   });
 
-  it("should update startTime when dispatching ALARM/START", () => {
+  it("should update startTime when dispatching ALARM/START", async () => {
     const { result } = renderHook(() => useAlarm(), { wrapper });
 
     const newStartTime = new Date();
 
-    act(() => {
+    await act(async () => {
       result.current.dispatch({ type: "ALARM/START", payload: newStartTime });
     });
 
@@ -63,32 +63,32 @@ describe("AlarmContext", () => {
 
     const { result } = renderHook(() => useAlarm(), { wrapper });
 
-    act(() => {
+    await act(async () => {
       result.current.dispatch({ type: "ALARM/END", payload: newEndTime });
     });
 
     await waitFor(() => expect(result.current.state.endTime).toEqual(newEndTime));
   });
 
-  it("should update interval when dispatching ALARM/INTERVAL", () => {
+  it("should update interval when dispatching ALARM/INTERVAL", async () => {
     const { result } = renderHook(() => useAlarm(), { wrapper });
 
-    const newInterval = 30;
+    const newInterval = 15;
 
-    act(() => {
+    await act(async () => {
       result.current.dispatch({ type: "ALARM/INTERVAL", payload: newInterval });
     });
 
     expect(result.current.state.interval).toBe(newInterval);
   });
 
-  it("should update endTime if startTime is greater than or equal to endTime", () => {
+  it("should update endTime if startTime is greater than or equal to endTime", async () => {
     const { result } = renderHook(() => useAlarm(), { wrapper });
 
     const startTime = new Date("2023-03-18T18:00:00.000Z");
     const endTime = new Date("2023-03-18T09:00:00.000Z");
 
-    act(() => {
+    await act(async () => {
       result.current.dispatch({ type: "ALARM/START", payload: startTime });
       result.current.dispatch({ type: "ALARM/END", payload: endTime });
     });

@@ -27,17 +27,17 @@ describe("DrinkingContext", () => {
     expect(result.current.state).toEqual(expectedInitialState);
   });
 
-  it("should toggle the unit when dispatching DRINKING/TOOGLED", () => {
+  it("should toggle the unit when dispatching DRINKING/TOGGLED", () => {
     const { result } = renderHook(() => useDrinking(), { wrapper });
 
     act(() => {
-      result.current.dispatch({ type: "DRINKING/TOOGLED" });
+      result.current.dispatch({ type: "DRINKING/TOGGLED" });
     });
 
     expect(result.current.state.unit).toBe("fl oz");
 
     act(() => {
-      result.current.dispatch({ type: "DRINKING/TOOGLED" });
+      result.current.dispatch({ type: "DRINKING/TOGGLED" });
     });
 
     expect(result.current.state.unit).toBe("mL");

@@ -34,7 +34,7 @@ const initialState: DrinkingState = (() => {
 
 function drinkingReducer(draft: DrinkingState, action: DrinkingAction): void {
   switch (action.type) {
-    case "DRINKING/TOOGLED":
+    case "DRINKING/TOGGLED":
       draft.unit = draft.unit === "mL" ? "fl oz" : "mL";
       break;
     case "DRINKING/GOAL_CHANGED":

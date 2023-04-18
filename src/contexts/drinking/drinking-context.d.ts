@@ -4,7 +4,7 @@ export {};
 
 declare global {
   type DrinkingAction =
-    | { type: "DRINKING/TOOGLED" }
+    | { type: "DRINKING/TOGGLED" }
     | { type: "DRINKING/DELETED"; payload: Date }
     | { type: "DRINKING/GOAL_CHANGED"; payload: number }
     | { type: "DRINKING/UPDATED"; payload: DrinkingItem }

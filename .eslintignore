@@ -6,3 +6,4 @@ coverage
 .eslintrc.js
 *.config.js
 index.js
+__mocks__/@notifee/react-native.js

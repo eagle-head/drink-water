@@ -1,5 +1,7 @@
 import React from "react";
 
+import notifee from "@notifee/react-native";
+import { useFocusEffect } from "@react-navigation/native";
 import { format } from "date-fns";
 import { enUS } from "date-fns/locale";
 import { StyleSheet, Switch, TouchableOpacity, View } from "react-native";
@@ -9,6 +11,7 @@ import { SettingsList } from "../components/SettingsList/SettingsList";
 
 import { Divider, ModalInput, Typography } from "@/components";
 import { useAlarm, useDrinking } from "@/contexts";
+import { requestNotificationPermission } from "@/notifications";
 
 export const SettingsScreen: RNElement<SettingsScreenProps> = () => {
   const { state: alarmState, dispatch: alarmDispatch } = useAlarm();
@@ -26,13 +29,32 @@ export const SettingsScreen: RNElement<SettingsScreenProps> = () => {
 
   function toogleUnitSwitch() {
     setIsUnitSwitchEnabled(prevState => !prevState);
-    drinkingDispatch({ type: "DRINKING/TOOGLED" });
+    drinkingDispatch({ type: "DRINKING/TOGGLED" });
   }
 
   function toogleAlarmSwitch() {
     setIsAlarmSwitchEnabled(prevState => !prevState);
-    alarmDispatch({ type: "ALARM/TOOGLED" });
+    alarmDispatch({ type: "ALARM/TOGGLED" });
   }
+
+  useFocusEffect(
+    React.useCallback(() => {
+      const executeRequestNotificationPermission = async () => {
+        await requestNotificationPermission();
+      };
+
+      executeRequestNotificationPermission();
+    }, [])
+  );
+
+  React.useEffect(() => {
+    notifee.getTriggerNotificationIds().then(ids => {
+      console.log(" ");
+      console.log("Trigger notifications length: ", ids.length);
+      console.log("All trigger notifications: ", ids);
+      console.log(" ");
+    });
+  }, [alarmState, drinkingState]);
 
   return (
     <>

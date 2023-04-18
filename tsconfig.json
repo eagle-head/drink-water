@@ -7,18 +7,19 @@
     "baseUrl": "./",
     "paths": {
       "@/enum": ["src/enum"],
-      "@/tests/*": ["src/tests/*"],
       "@/hooks": ["src/hooks"],
       "@/utils": ["src/utils"],
       "@/themes": ["src/themes"],
       "@/stores": ["src/stores"],
       "@/routes": ["src/routes"],
       "@/assets": ["src/assets"],
+      "@/tests/*": ["src/tests/*"],
       "@/storage": ["src/storage"],
       "@/contexts": ["src/contexts"],
       "@/features": ["src/features"],
       "@/providers": ["src/providers"],
-      "@/components": ["src/components"]
+      "@/components": ["src/components"],
+      "@/notifications": ["src/notifications"]
     }
   },
   "include": ["src", ".eslintrc.js", "jest.setup.js"]
